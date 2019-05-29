@@ -1,4 +1,11 @@
 table{
     width: max-content;
-    text-align: center
+    text-align: center;
+    margin-top: 70px;
+}
+
+.download-btn{
+    position: fixed;
+    top: 15px;
+    left: 15px;
 }

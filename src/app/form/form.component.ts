@@ -140,42 +140,42 @@ export class FormComponent implements OnInit {
         {
           "question": "Did the training meet your expectations?",
           "question_type": "yes or No",
-          "answer": "",
+          "answer": this.form.controls['question_3'].value.expectations,
           "comments": "",
           "subquestions": [
             {
-              "subQuestion": "If yes, what did you like most? If no, where could improvements be made?",
-              "Answer": this.form.controls['question_3'].value.expectations,
-              "comment": this.form.controls['question_3'].value.expectations_comment
+              "sub_ques": "If yes, what did you like most? If no, where could improvements be made?",
+              "rating": "",
+              "comments": this.form.controls['question_3'].value.expectations_comment
             }
           ]
         },
         {
           "question": "Which was the most valuable part of the training?",
           "question_type": "",
-          "answer": "",
-          "comments": this.form.controls['question_4'].value.valuable_comment,
+          "answer": this.form.controls['question_4'].value.valuable_comment,
+          "comments": "",
           "subquestions": []
         },
         {
           "question": "Which topics were missing in the training?",
           "question_type": "",
-          "answer": "",
-          "comments": this.form.controls['question_5'].value.missing_comment,
+          "answer": this.form.controls['question_5'].value.missing_comment,
+          "comments": "",
           "subquestions": []
         },
         {
           "question": "How long did you already work with EB Product (Months r Years)",
           "question_type": "",
-          "answer": "",
-          "comments": this.form.controls['question_6'].value.duration_comment,
+          "answer": this.form.controls['question_6'].value.duration_comment,
+          "comments": "",
           "subquestions": []
         },
         {
           "question": "For which tasks do you use product?",
           "question_type": "",
-          "answer": "",
-          "comments": this.form.controls['question_7'].value.product_comment,
+          "answer": this.form.controls['question_7'].value.product_comment,
+          "comments": "",
           "subquestions": []
         },
         {
@@ -209,24 +209,24 @@ export class FormComponent implements OnInit {
         {
           "question": "Are you satisfied with the training? We welcome your testimonial statement?",
           "question_type": "",
-          "answer": "",
-          "comments": this.form.controls['question_9'].value.satisfaction_comment,
+          "answer": this.form.controls['question_9'].value.satisfaction_comment,
+          "comments": "",
           "subquestions": []
         }
 
       ]
     }
     console.log(finalResponse);
-    this.makeApiCall(finalResponse)
+    this.makeApiCall(finalResponse);
   }
   makeApiCall(payload) {
     this.httpService.sendFeedback(payload).subscribe(a => {
       console.log(a);
       if (a.status === 200) {
-        this.router.navigate(['success'])
-      }else{
-        alert("Some Error Occured. Please Try Again!")
+        this.router.navigate(['success']);
+      } else {
+        alert("Some Error Occured. Please Try Again!");
       }
-    })
+    });
   }
 }

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListComponent } from './list/list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SuccessComponent } from './success/success.component';
+import { ExcelService } from './services/excel.services';
 
 const routes: Routes = [
   { path: '', redirectTo: '/' ,pathMatch:'full'},
@@ -29,7 +30,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

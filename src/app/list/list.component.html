@@ -1,3 +1,5 @@
+<button class="btn btn-success download-btn" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o">Download Excel Report</i></button>
+
 <table class="table table-bordered table-active">
   <thead>
     <tr>
@@ -38,12 +40,12 @@
             </div>
             <div class="row" *ngIf="item.question_type=== 'yes or No'">
               <div class="col-2 col-sm-9" *ngFor="let question of item?.subquestions">
-                {{question?.Answer}}, {{question?.comment}}
+                {{item?.answer}}, {{question?.comments}}
               </div>
             </div>
             <div class="row" *ngIf="item.question_type=== ''">
               <div class="col-2 col-sm-6">
-                {{item?.comments}}
+                {{item?.answer}}
               </div>
             </div>
           </div>
