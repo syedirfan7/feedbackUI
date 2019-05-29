@@ -1,0 +1,31 @@
+<div>
+  <div class="container mx-auto my-3">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="float-left">
+          <h4 class="title">
+            Create A Training
+          </h4>
+      
+        </div>
+
+      </div>
+     
+      <div class="my-3 float-left col-lg-12">
+        <p>Training Name</p>
+        <div formGroupName="training">
+          <input type="text" name="training_name" id="training_name" formControlName="training_name" required>
+        </div>
+      </div>
+      <div class="my-3 float-left col-lg-12">
+        <p>Trainers</p>
+        <div formGroupName="trainers">
+          <input type="text" name="trainer_name" id="trainer_name" formControlName="trainer_name" required>
+        </div>
+      </div>
+      <div class="my-3 float-left col-lg-12">
+        <button class="btn btn-success" type="submit"> Submit </button>
+      </div>
+    </form>
+  </div>
+</div>

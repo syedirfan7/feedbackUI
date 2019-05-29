@@ -24,5 +24,20 @@ export class HttpService {
       })
     );
   }
+  createTraining(trainingdetails): Observable<any> {
+    return this.http
+    .post<any>('https://feedback-eb.herokuapp.com/trainingdetails/add', trainingdetails,
+     { headers: headers, observe: 'response' }).pipe(
+      tap(e => {
+        // this.routeToList(e);
+      })
+    );
+  }
+  getTrainingList() {
+    return this.http.get('https://feedback-eb.herokuapp.com/trainingdetails/list');
+  }
+  getTrainingDetails(trainingId) {
+    return this.http.get('https://feedback-eb.herokuapp.com/trainingdetails/details/'+trainingId);
+  }
 }
 

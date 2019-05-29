@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let training of TrainingList; let i = index">
+    <a [routerLink]="['/trainingform',training?.id]">Training Name: {{training?.training}}</a><br/>
+    Trainers: {{training?.trainers}}
+  </li>
+</ul>

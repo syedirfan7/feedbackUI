@@ -3,14 +3,28 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpService } from '../shared/http.service';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
-})
-export class FormComponent implements OnInit {
 
+@Component({
+  selector: 'app-trainingform',
+  templateUrl: './trainingform.component.html',
+  styleUrls: ['./trainingform.component.css']
+})
+export class TrainingformComponent implements OnInit {
+
+  trainingform = '';
+  public href = '';
+  TrainingDetails = {};
+  trainingName = '';
+  trainerNames = '';
   form = this.fb.group({
+    training_n: this.fb.group({
+
+      training_name: ['', Validators.required],
+    }),
+    trainer_n: this.fb.group({
+
+      trainer_names: ['', Validators.required],
+    }),
     question_1: this.fb.group({
       quality: ['', Validators.required],
       quality_comment: [''],
@@ -68,17 +82,27 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpService: HttpService,
     private router: Router) { }
 
-  ngOnInit() {
+    ngOnInit() {
+      this.href = this.router.url;
+      this.trainingform = this.href.split("/").pop();
+      console.log(this.trainingform);
+      this.httpService.getTrainingDetails(this.trainingform).subscribe(response => {
+        console.log(response);
+        this.TrainingDetails = response as {};
+        this.trainingName = this.TrainingDetails.training;
+        this.trainerNames = this.TrainingDetails.trainers;
+      });
   }
+
   onSubmit() {
     console.log(JSON.stringify(this.form.value));
     this.convertResponseToPost(this.form.value);
   }
   convertResponseToPost(formValue) {
-    console.log(this.form.controls['question_1'].value.logic)
+ 
     const finalResponse = {
-      "training": "EB_Guide_test",
-      "trainers": "Irfan",
+      "training": this.trainingName,
+      "trainers": this.trainerNames,
       "location": "BangaloreOne",
       "questions": [
         {
@@ -229,4 +253,5 @@ export class FormComponent implements OnInit {
       }
     });
   }
+
 }
