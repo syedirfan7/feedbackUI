@@ -1,0 +1,54 @@
+<table class="table table-bordered table-active">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Location</th>
+      <th>Date</th>
+      <th>Training</th>
+      <th>Trainers</th>
+      <th *ngFor="let item of feedBackList[0]?.questions; let i = index">
+        <div class="row">
+          <div class="col-sm-9">
+            <p>{{item.question}}</p>
+            <div class="row">
+              <div class="col-8 col-sm-3" *ngFor="let question of item?.subquestions">
+                <h6> {{question?.sub_ques}}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let list of feedBackList; let i = index">
+      <td>{{i}}</td>
+      <td>{{list.location}}</td>
+      <td>{{i}}</td>
+      <td>{{list.training}}</td>
+      <td>{{list.trainers}}</td>
+      <td *ngFor="let item of list.questions; let i = index">
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="row" *ngIf="item.question_type=== 'rating'">
+              <div class="col-8 col-sm-3" *ngFor="let question of item?.subquestions">
+                {{question?.rating}}
+              </div>
+            </div>
+            <div class="row" *ngIf="item.question_type=== 'yes or No'">
+              <div class="col-2 col-sm-9" *ngFor="let question of item?.subquestions">
+                {{question?.Answer}}, {{question?.comment}}
+              </div>
+            </div>
+            <div class="row" *ngIf="item.question_type=== ''">
+              <div class="col-2 col-sm-6">
+                {{item?.comments}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
