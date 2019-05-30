@@ -2,9 +2,9 @@
   <div class="container mx-auto my-3">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
-        <div class="float-left">
+        <div class="my-3 float-left col-lg-12">
           <h4 class="title">
-            Create A Training
+            Create New Training
           </h4>
       
         </div>
@@ -14,15 +14,37 @@
       <div class="my-3 float-left col-lg-12">
         <p>Training Name</p>
         <div formGroupName="training">
-          <input type="text" name="training_name" id="training_name" formControlName="training_name" required>
+          <!-- <input type="text" name="training_name" id="training_name" formControlName="training_name" required> -->
+          <select class="custom-select"  name="training_name" id="training_name"  formControlName="training_name">
+              <option value="" disabled>Choose Training</option>
+              <option *ngFor="let training of trainingList" [ngValue]="training.training">{{training.training}}</option>
+              </select>
         </div>
       </div>
       <div class="my-3 float-left col-lg-12">
         <p>Trainers</p>
         <div formGroupName="trainers">
-          <input type="text" name="trainer_name" id="trainer_name" formControlName="trainer_name" required>
+          <!-- <input type="text" name="trainer_name" id="trainer_name" formControlName="trainer_name" required> -->
+
+          <select class="custom-select"  name="trainer_name" id="trainer_name"   formControlName="trainer_name">
+              <option value="" disabled>Choose Trainer</option>
+              <option *ngFor="let trainer of trainerList" [ngValue]="trainer.trainers">{{trainer.trainers}}</option>
+              </select>
+
         </div>
       </div>
+      <div class="my-3 float-left col-lg-5">
+          <p>Location</p>
+          <div formGroupName="location">
+            <input type="text" name="location_name" id="location_name" formControlName="location_name" required>
+          </div>
+        </div>
+        <div class="my-3 float-left col-lg-5">
+            <p>Training Date</p>
+            <div formGroupName="sel_training_date">
+              <input type="date" name="training_date" id="training_date" formControlName="training_date" required>
+            </div>
+          </div>
       <div class="my-3 float-left col-lg-12">
         <button class="btn btn-success" type="submit"> Submit </button>
       </div>

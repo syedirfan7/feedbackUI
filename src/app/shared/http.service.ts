@@ -10,34 +10,40 @@ const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 })
 export class HttpService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getList(){
+  getList() {
     return this.http.get('https://feedback-eb.herokuapp.com/feedback/list');
   }
   sendFeedback(payLoad): Observable<any> {
     return this.http
-    .post<any>('https://feedback-eb.herokuapp.com/feedback/create', payLoad,
-     { headers: headers, observe: 'response' }).pipe(
-      tap(e => {
-        // this.routeToList(e);
-      })
-    );
+      .post<any>('https://feedback-eb.herokuapp.com/feedback/create', payLoad,
+        { headers: headers, observe: 'response' }).pipe(
+          tap(e => {
+            // this.routeToList(e);
+          })
+        );
   }
   createTraining(trainingdetails): Observable<any> {
     return this.http
-    .post<any>('https://feedback-eb.herokuapp.com/trainingdetails/add', trainingdetails,
-     { headers: headers, observe: 'response' }).pipe(
-      tap(e => {
-        // this.routeToList(e);
-      })
-    );
+      .post<any>('https://feedback-eb.herokuapp.com/trainingdetails/add', trainingdetails,
+        { headers: headers, observe: 'response'}).pipe(
+          tap(e => {
+            // this.routeToList(e);
+          })
+        );
+  }
+  getTrainingNameList() {
+    return this.http.get('https://feedback-eb.herokuapp.com/trainingnames/list');
+  }
+  getTrainerNameList() {
+    return this.http.get('https://feedback-eb.herokuapp.com/trainernames/list');
   }
   getTrainingList() {
     return this.http.get('https://feedback-eb.herokuapp.com/trainingdetails/list');
   }
   getTrainingDetails(trainingId) {
-    return this.http.get('https://feedback-eb.herokuapp.com/trainingdetails/details/'+trainingId);
+    return this.http.get('https://feedback-eb.herokuapp.com/trainingdetails/details/' + trainingId);
   }
 }
 

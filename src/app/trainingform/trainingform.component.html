@@ -2,18 +2,20 @@
   <div class="container mx-auto my-3">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
-        <div class="float-left">
+        <div class="my-3 float-left col-lg-6">
           <h4 class="title">
             Training Feedback Form
           </h4>
-
-          <label for="name">Your Name : </label>
-          <input type="text" name="name" id="id_name"> <Small>(optional)</Small>
+          
         </div>
-        <div class="float-right">
+        <div class="float-right mx-3">
           <img src="assets/images/eb logo.jpg" alt="eb_logo" srcset="" height=100px width=100px>
         </div>
       </div>
+      <div class="my-3 float-left col-lg-12">
+          <p><label for="name">Your Name: </label></p>
+          <input type="text" name="name" id="id_name"> <Small>(optional)</Small>
+          </div>
       <div class="my-3 float-left col-lg-12">
           <p>Training Name</p>
           <div formGroupName="training_n">
@@ -26,7 +28,19 @@
               <input type="text" name="trainer_names" id="trainer_names" formControlName="trainer_names"  readonly [value]=TrainingDetails?.trainers>
             </div>
           </div>
-      <div class="my-3 float-left">
+          <div class="my-3 float-left col-lg-12">
+              <p>Location</p>
+              <div formGroupName="training_location">
+                <input type="text" name="location_name" id="location_name" formControlName="location_name"  readonly [value]=TrainingDetails?.location>
+              </div>
+            </div>
+            <div class="my-3 float-left col-lg-12">
+                <p>Date</p>
+                <div formGroupName="training_date">
+                  <input type="text" name="t_date" id="t_date" formControlName="t_date"  readonly [value]=TrainingDetails?.training_date>
+                </div>
+              </div>
+      <div class="my-3 float-left col-lg-12">
          
         <p>1.How would you rate the quality of the training with regards to its contents?</p>
         <table class="table table-bordered table-secondary" formGroupName="question_1">
@@ -120,7 +134,7 @@
           </tbody>
         </table>
       </div>
-      <div class="my-3 float-left">
+      <div class="my-3 float-left col-lg-12">
         <p>2. How would you rate the quality of the training with regards to the trainer?</p>
         <table class="table table-bordered table-secondary" formGroupName="question_2">
           <thead>
@@ -220,9 +234,9 @@
         <p>3. Did the training meet your expectations?</p>
         <div formGroupName="question_3">
           <input type="radio" id="expectations_yes" name="expectations" formControlName="expectations" value="yes">
-          <label for="expectations_yes">Yes </label>
+          <label for="expectations_yes"> Yes </label> &nbsp;&nbsp;&nbsp;
           <input type="radio" id="expectations_no" name="expectations" formControlName="expectations" value="no">
-          <label for="expectations_no">No </label>
+          <label for="expectations_no"> No </label>
           <p>If yes, what did you like most? If no, where could improvements be made?
 
           </p>
@@ -254,7 +268,7 @@
           <input type="text" name="product_comment" id="product_comment" formControlName="product_comment" required>
         </div>
       </div>
-      <div class="my-3 float-left">
+      <div class="my-3 float-left col-lg-12">
         <p>8. Your overall training experiences?</p>
         <table class="table table-bordered table-secondary" formGroupName="question_8">
           <thead>

@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpService } from '../shared/http.service';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup
+} from '@angular/forms';
+import {
+  HttpService
+} from '../shared/http.service';
+import {
+  Router
+} from '@angular/router';
 
 
 @Component({
@@ -16,6 +27,9 @@ export class TrainingformComponent implements OnInit {
   TrainingDetails = {};
   trainingName = '';
   trainerNames = '';
+  trainingLocation = '';
+  trainingDate = '';
+
   form = this.fb.group({
     training_n: this.fb.group({
 
@@ -24,6 +38,14 @@ export class TrainingformComponent implements OnInit {
     trainer_n: this.fb.group({
 
       trainer_names: ['', Validators.required],
+    }),
+    training_location: this.fb.group({
+
+      location_name: ['', Validators.required],
+    }),
+    training_date: this.fb.group({
+
+      t_date: ['', Validators.required],
     }),
     question_1: this.fb.group({
       quality: ['', Validators.required],
@@ -80,18 +102,20 @@ export class TrainingformComponent implements OnInit {
     })
   });
   constructor(private fb: FormBuilder, private httpService: HttpService,
-    private router: Router) { }
+    private router: Router) {}
 
-    ngOnInit() {
-      this.href = this.router.url;
-      this.trainingform = this.href.split("/").pop();
-      console.log(this.trainingform);
-      this.httpService.getTrainingDetails(this.trainingform).subscribe(response => {
-        console.log(response);
-        this.TrainingDetails = response as {};
-        this.trainingName = this.TrainingDetails.training;
-        this.trainerNames = this.TrainingDetails.trainers;
-      });
+  ngOnInit() {
+    this.href = this.router.url;
+    this.trainingform = this.href.split("/").pop();
+    console.log(this.trainingform);
+    this.httpService.getTrainingDetails(this.trainingform).subscribe(response => {
+      console.log(response);
+      this.TrainingDetails = response as {};
+      this.trainingName = this.TrainingDetails["training"];
+      this.trainerNames = this.TrainingDetails["trainers"];
+      this.trainingLocation = this.TrainingDetails["location"];
+      this.trainingDate = this.TrainingDetails["training_date"];
+    });
   }
 
   onSubmit() {
@@ -99,19 +123,18 @@ export class TrainingformComponent implements OnInit {
     this.convertResponseToPost(this.form.value);
   }
   convertResponseToPost(formValue) {
- 
+
     const finalResponse = {
       "training": this.trainingName,
       "trainers": this.trainerNames,
-      "location": "BangaloreOne",
-      "questions": [
-        {
+      "location": this.trainingLocation,
+      "date": this.trainingDate,
+      "questions": [{
           "question": "How would you rate the quality of the training with regards to its contents?",
           "question_type": "rating",
           "answer": "",
           "comments": "",
-          "subquestions": [
-            {
+          "subquestions": [{
               "sub_ques": "Quality of content",
               "rating": this.form.controls['question_1'].value.quality,
               "comments": this.form.controls['question_1'].value.quality_comment
@@ -138,8 +161,7 @@ export class TrainingformComponent implements OnInit {
           "question_type": "rating",
           "answer": "",
           "comments": "",
-          "subquestions": [
-            {
+          "subquestions": [{
               "sub_ques": "Presentation Skills",
               "rating": this.form.controls['question_2'].value.presentation,
               "comments": this.form.controls['question_2'].value.presentation_comment
@@ -166,13 +188,11 @@ export class TrainingformComponent implements OnInit {
           "question_type": "yes or No",
           "answer": this.form.controls['question_3'].value.expectations,
           "comments": "",
-          "subquestions": [
-            {
-              "sub_ques": "If yes, what did you like most? If no, where could improvements be made?",
-              "rating": "",
-              "comments": this.form.controls['question_3'].value.expectations_comment
-            }
-          ]
+          "subquestions": [{
+            "sub_ques": "If yes, what did you like most? If no, where could improvements be made?",
+            "rating": "",
+            "comments": this.form.controls['question_3'].value.expectations_comment
+          }]
         },
         {
           "question": "Which was the most valuable part of the training?",
@@ -207,8 +227,7 @@ export class TrainingformComponent implements OnInit {
           "question_type": "rating",
           "answer": "",
           "comments": "",
-          "subquestions": [
-            {
+          "subquestions": [{
               "sub_ques": "Recommendation pf this training to others",
               "rating": this.form.controls['question_8'].value.recommendation,
               "comments": this.form.controls['question_8'].value.recommendation_comment
