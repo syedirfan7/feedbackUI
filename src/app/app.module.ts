@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,10 +11,12 @@ import { ExcelService } from './services/excel.services';
 import { CreatetrainingComponent } from './createtraining/createtraining.component';
 import { ListTrainingsComponent } from './list-trainings/list-trainings.component';
 import { TrainingformComponent } from './trainingform/trainingform.component';
+import { HomeComponent } from './home/home.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/' ,pathMatch:'full'},
-  { path: '', component: ListComponent },
+  { path: '', redirectTo: '/home' ,pathMatch:'full'},  
+  { path: 'home', component: HomeComponent },
   { path: 'list', component: ListComponent },
   { path: 'form', component: FormComponent },
   { path: 'createtraining', component: CreatetrainingComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     SuccessComponent,
     CreatetrainingComponent,
     ListTrainingsComponent,
-    TrainingformComponent
+    TrainingformComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
