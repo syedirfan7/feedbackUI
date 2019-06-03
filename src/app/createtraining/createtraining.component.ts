@@ -23,9 +23,12 @@ export class CreatetrainingComponent implements OnInit {
     location: this.fb.group({
       location_name: ['', Validators.required],
     }),
-    sel_training_date: this.fb.group({
-      training_date: ['', Validators.required],
-    })  
+    sel_from_date: this.fb.group({
+      from_date: ['', Validators.required],
+    }),
+    sel_to_date: this.fb.group({
+      to_date: ['', Validators.required],
+    }),
   });
 
   constructor(private fb: FormBuilder, private httpService: HttpService,
@@ -52,7 +55,8 @@ export class CreatetrainingComponent implements OnInit {
       "training": this.form.controls['training'].value.training_name,
       "trainers": this.form.controls['trainers'].value.trainer_name,
       "location": this.form.controls['location'].value.location_name,
-      "training_date": this.form.controls['sel_training_date'].value.training_date
+      "from_date": this.form.controls['sel_from_date'].value.from_date,
+      "to_date": this.form.controls['sel_to_date'].value.to_date,
     };
 
     this.makeApiCall(finalResponse);
@@ -61,10 +65,12 @@ export class CreatetrainingComponent implements OnInit {
   makeApiCall(trainingdetails) {
     this.httpService.createTraining(trainingdetails).subscribe(a => {
       if (a.status === 200) {
-        this.router.navigate(['success']);
+
       } else {
         alert("Some Error Occured. Please Try Again!");
       }
     });
+
+    this.router.navigate(['traininglist']);
   }
 }

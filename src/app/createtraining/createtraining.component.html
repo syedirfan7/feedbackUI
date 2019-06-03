@@ -33,18 +33,24 @@
 
         </div>
       </div>
-      <div class="my-3 float-left col-lg-5">
+      <div class="my-3 float-left col-lg-6">
           <p>Location</p>
           <div formGroupName="location">
             <input type="text" name="location_name" id="location_name" formControlName="location_name" required>
           </div>
         </div>
-        <div class="my-3 float-left col-lg-5">
-            <p>Training Date</p>
-            <div formGroupName="sel_training_date">
-              <input type="date" name="training_date" id="training_date" formControlName="training_date" required>
+        <div class="my-3 float-left col-lg-3">
+            <p>From Date</p>
+            <div formGroupName="sel_from_date">
+              <input type="date" name="from_date" id="from_date" formControlName="from_date" required>
             </div>
           </div>
+          <div class="my-3 float-left col-lg-3">
+              <p>To Date</p>
+              <div formGroupName="sel_to_date">
+                <input type="date" name="to_date" id="to_date" formControlName="to_date" required>
+              </div>
+            </div>
       <div class="my-3 float-left col-lg-12">
         <button class="btn btn-success" type="submit"> Submit </button>
       </div>

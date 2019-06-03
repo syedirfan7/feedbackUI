@@ -114,7 +114,13 @@ export class TrainingformComponent implements OnInit {
       this.trainingName = this.TrainingDetails["training"];
       this.trainerNames = this.TrainingDetails["trainers"];
       this.trainingLocation = this.TrainingDetails["location"];
-      this.trainingDate = this.TrainingDetails["training_date"];
+      if (this.TrainingDetails["from_date"] == this.TrainingDetails["to_date"])
+      {
+        this.trainingDate = this.TrainingDetails["from_date"];
+      }
+      else{
+        this.trainingDate =  this.TrainingDetails["from_date"] + "to" + this.TrainingDetails["to_date"]
+      }
     });
   }
 

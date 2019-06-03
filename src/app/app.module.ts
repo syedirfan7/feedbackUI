@@ -12,6 +12,8 @@ import { CreatetrainingComponent } from './createtraining/createtraining.compone
 import { ListTrainingsComponent } from './list-trainings/list-trainings.component';
 import { TrainingformComponent } from './trainingform/trainingform.component';
 import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
+import { SelectboxPipe } from './selectbox.pipe';
 
 
 const routes: Routes = [
@@ -33,14 +35,17 @@ const routes: Routes = [
     CreatetrainingComponent,
     ListTrainingsComponent,
     TrainingformComponent,
-    HomeComponent
+    HomeComponent,
+    SelectboxPipe
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
+  exports:[SelectboxPipe],
   providers: [ExcelService],
   bootstrap: [AppComponent]
 })

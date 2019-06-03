@@ -7,6 +7,9 @@ table{
 .download-btn{
     margin-left: 15px;
     font-weight: bold;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .title{

@@ -11,12 +11,24 @@ export class ListComponent implements OnInit {
 
   feedBackList = [];
   feedBackListTabulated = [];
-  constructor(private httpService: HttpService, private excelService: ExcelService) { }
+  feedbackWholeData = [];
+  trainingList = [];
+  selectedValue = undefined;
+  constructor(private httpService: HttpService, private excelService: ExcelService) {}
+
+   updateSelectedValue(event: string): void{
+    // this.selectedValue = event;
+    // console.log(this.selectedValue);
+  }
 
   ngOnInit() {
     this.httpService.getList().subscribe(response => {
       console.log(response);
       this.feedBackListTabulated = response as [];
+      this.feedbackWholeData = response as [];
+      // this.feedBackListTabulated.pop();
+      // console.log(this.feedBackListTabulated);
+      // console.log(this.feedbackWholeData);
     });
 
     this.httpService.getList().subscribe(response => {
@@ -24,12 +36,33 @@ export class ListComponent implements OnInit {
       this.feedBackList = response as [];
     });
 
+ this.httpService.getTrainingNameList().subscribe(response => {
+        console.log(response);
+        this.trainingList = response as [];
+      });
 
   }
 
+
+
+
   exportAsXLSX():void {
+
+    // if(this.selectedValue != undefined){
+    //   for(var i =0; i<this.feedBackList.length; i++){
+    //     if(this.feedBackList[i].training != this.selectedValue){
+    //       this.feedBackList.splice(i, 1);
+    //     }
+
+    //   }
+    //   console.log(this.feedBackList);
+    // }
+
     for(var i =0; i<this.feedBackList.length; i++){
+      
       var question_json = {};
+      // console.log(i);
+      
       for(var j = 0;j< this.feedBackList[i].questions.length; j++){
         if(this.feedBackList[i].questions[j].question_type == "rating"){          
           for(var k = 0;k< this.feedBackList[i].questions[j].subquestions.length; k++){
